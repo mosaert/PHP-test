@@ -5,5 +5,5 @@ if (!isset($_GET['id'])) {
 }
 
 $titulo = 'Detalle del producto';
-$contenido = 'iContent.php';
-include 'template.php';
+$contenido = 'content/iContent.php';
+include '../template.php';

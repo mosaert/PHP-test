@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: login.php');
+    header('Location: auth/login.php');
     exit;
 }
 $user = $_SESSION['usuario'];
@@ -12,92 +12,7 @@ $user = $_SESSION['usuario'];
 <head>
     <meta charset="UTF-8">
     <title><?= $titulo ?? 'PHP Test' ?></title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f0f0f0;
-            padding: 10px 20px;
-            position: relative;
-        }
-
-        header, footer {
-            background-color: #f0f0f0;
-            padding: 10px 20px;
-        }
-
-        header .user-info {
-            float: right;
-            font-size: 0.9em;
-            text-align: right;
-        }
-
-        .user-dropdown {
-            cursor: pointer;
-            background-color: #f0f0f0;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 0.95em;
-            position: relative;
-        }
-
-        .user-dropdown:hover {
-            background-color: #e0e0e0;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 35px;
-            right: 0;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 150px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            z-index: 100;
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 10px;
-            color: #333;
-            text-decoration: none;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f5f5f5;
-        }
-
-        main {
-            flex: 1;
-            padding: 20px;
-        }
-
-        footer {
-            text-align: center;
-            color: #777;
-            border-top: 1px solid #ddd;
-        }
-
-        a {
-            text-decoration: none;
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -108,7 +23,7 @@ $user = $_SESSION['usuario'];
                 <?= htmlspecialchars($user['firstName'] . ' ' . $user['lastName']) ?> ⮟
                 <div class="dropdown-content" id="userMenu">
                     <a href="pfController.php">Perfil</a>
-                    <a href="logout.php">Cerrar sesión</a>
+                    <a href="../auth/logout.php">Cerrar sesión</a>
                 </div>
             </div>
         </header>

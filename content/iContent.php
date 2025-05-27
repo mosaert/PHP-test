@@ -10,7 +10,7 @@ if (!$producto) {
 ?>
 
 <div style="margin-bottom: 20px;">
-    <a href="pController.php" style="
+    <a href="../controller/pController.php" style="
         display: inline-block;
         padding: 8px 16px;
         background-color: #0077cc;

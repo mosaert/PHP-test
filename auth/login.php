@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($usuarios as $usuario) {
         if ($usuario['username'] === $username && $usuario['password'] === $password) {
             $_SESSION['usuario'] = $usuario;
-            header('Location: pController.php');
+            header('Location: ../controller/pController.php');
             exit;
         }
     }

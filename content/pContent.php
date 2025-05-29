@@ -10,19 +10,19 @@ sort($categorias);
 
 <h1>Productos</h1>
 
-<div class="categoria-container">
-    <button class="categoria-btn" onclick="toggleCategorias()">Categorías ⮟</button>
-    <div class="categoria-menu" id="categoriaMenu">
-        <a href="#" class="categoria-link" onclick="filtrarCategoria('Todas')">Todas</a>
-        <?php foreach ($categorias as $cat): ?>
-            <a href="#" class="categoria-link" onclick="filtrarCategoria('<?= $cat ?>')">
-                <?= ucfirst($cat) ?>
-            </a>
-        <?php endforeach; ?>
-    </div>
-</div>
+<div class="catalogo-layout">
+    <aside class="categorias-lista">
+        <h3>Categorías</h3>
+        <ul>
+            <li><a href="#" onclick="filtrarCategoria('Todas')">Todas</a></li>
+            <?php foreach ($categorias as $cat): ?>
+                <li><a href="#" onclick="filtrarCategoria('<?= $cat ?>')"><?= ucfirst($cat) ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </aside>
 
-<div id="productos" class="productos-grid"></div>
+    <section class="productos-grid" id="productos"></section>
+</div>
 
 <script>
     const productos = <?= json_encode($productos) ?>;
@@ -44,7 +44,6 @@ sort($categorias);
     }
 
     function filtrarCategoria(categoria) {
-        toggleCategorias();
         if (categoria === 'Todas') {
             mostrarProductos(productos);
         } else {
@@ -52,20 +51,7 @@ sort($categorias);
             mostrarProductos(filtrados);
         }
     }
-
-    function toggleCategorias() {
-        const menu = document.getElementById('categoriaMenu');
-        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-    }
-
-    document.addEventListener('click', function(e) {
-        const menu = document.getElementById('categoriaMenu');
-        const btn = document.querySelector('.categoria-btn');
-        if (!menu.contains(e.target) && e.target !== btn) {
-            menu.style.display = 'none';
-        }
-    });
-
+    
     // carga todo al iniciar
     mostrarProductos(productos);
 </script>

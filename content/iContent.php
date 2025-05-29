@@ -9,48 +9,39 @@ if (!$producto) {
 }
 ?>
 
-<div style="margin-bottom: 20px;">
-    <a href="../controller/pController.php" style="
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #0077cc;
-        color: white;
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: bold;
-    ">
-        ⬅ Volver al catálogo
-    </a>
+<div class="detalle-producto-container">
+    <a href="../controller/pController.php" class="btn-volver">⬅ Volver al catálogo</a>
+
+    <div class="producto-detalle">
+        <div class="imagen-principal">
+            <img src="<?= htmlspecialchars($producto['images'][0]) ?>" alt="<?= htmlspecialchars($producto['title']) ?>">
+        </div>
+
+        <div class="info-producto">
+            <h1><?= htmlspecialchars($producto['title']) ?></h1>
+            <p><strong>Marca:</strong> <?= htmlspecialchars($producto['brand']) ?></p>
+            <p><strong>Categoría:</strong> <?= htmlspecialchars($producto['category']) ?></p>
+            <p><strong>Precio:</strong> $<?= $producto['price'] ?></p>
+            <p><strong>Rating:</strong> ⭐ <?= $producto['rating'] ?>/5</p>
+            <p><?= htmlspecialchars($producto['description']) ?></p>
+        </div>
+    </div>
+
+    <?php if (!empty($producto['reviews'])): ?>
+        <section class="reseñas">
+            <h2>Reseñas</h2>
+            <?php foreach ($producto['reviews'] as $review): ?>
+                <div class="review-card">
+                    <div class="review-header">
+                        <strong><?= htmlspecialchars($review['reviewerName']) ?></strong>
+                        <span>⭐ <?= $review['rating'] ?>/5</span>
+                    </div>
+                    <p><?= htmlspecialchars($review['comment']) ?></p>
+                    <small><?= date('d/m/Y', strtotime($review['date'])) ?></small>
+                </div>
+            <?php endforeach; ?>
+        </section>
+    <?php else: ?>
+        <p>No hay reseñas disponibles.</p>
+    <?php endif; ?>
 </div>
-
-<h1><?= htmlspecialchars($producto['title']) ?></h1>
-
-<div style="display: flex; gap: 30px;">
-    <div>
-        <img src="<?= htmlspecialchars($producto['images'][0]) ?>" alt="<?= htmlspecialchars($producto['title']) ?>" style="width: 300px; height: auto; border-radius: 4px;">
-    </div>
-    <div>
-        <p><strong>Marca:</strong> <?= htmlspecialchars($producto['brand']) ?></p>
-        <p><strong>Categoría:</strong> <?= htmlspecialchars($producto['category']) ?></p>
-        <p><strong>Precio:</strong> $<?= $producto['price'] ?></p>
-        <p><strong>Rating:</strong> <?= $producto['rating'] ?>/5</p>
-        <p><strong>Descripción:</strong></p>
-        <p><?= htmlspecialchars($producto['description']) ?></p>
-    </div>
-</div>
-
-<?php if (!empty($producto['reviews'])): ?>
-    <h2>Reseñas</h2>
-    <div style="margin-top: 10px;">
-        <?php foreach ($producto['reviews'] as $review): ?>
-            <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 6px;">
-                <strong><?= htmlspecialchars($review['reviewerName']) ?></strong>
-                <span style="float:right;">⭐ <?= $review['rating'] ?>/5</span>
-                <p><?= htmlspecialchars($review['comment']) ?></p>
-                <small><?= date('d/m/Y', strtotime($review['date'])) ?></small>
-            </div>
-        <?php endforeach; ?>
-    </div>
-<?php else: ?>
-    <p>No hay reseñas disponibles.</p>
-<?php endif; ?>
